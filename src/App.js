@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Signup from "./component/signUp/Signup";
+import SignIn from "./component/signIn/SignIn";
+import { signOut } from "firebase/auth";
+import { auth } from "./config/firebase";
 function App() {
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Signup />
+      <SignIn />
+      <button onClick={logout}>logout</button>
+    </>
   );
 }
 
